@@ -67,10 +67,17 @@ gem "plutonium", "~> 0.19.8"
 
 gem "annotated", "~> 0.1.1", :group => :development
 
-gem "standard", ">= 1.35.1", :group => :development
 
 gem "letter_opener", "~> 1.10", :group => :development
 # Add a web UI for Solid Queue
 gem "mission_control-jobs", "~> 0.3"
 # Add Solid Errors for error monitoring
 gem "solid_errors", "~> 0.5"
+
+gem "bcrypt", "~> 3.1"
+
+gem "sequel-activerecord_connection", "~> 2.0"
+
+gem "tilt", "~> 2.6"
+
+gem "rodauth-rails", "~> 2.0"

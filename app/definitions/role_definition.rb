@@ -1,0 +1,2 @@
+class RoleDefinition < ::ResourceDefinition
+end
