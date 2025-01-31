@@ -2,7 +2,6 @@ ChurchMgmtDashboardPortal::Engine.routes.draw do
   root to: "dashboard#index"
 
   register_resource ::Profile
-  register_resource ::User
   # register resources above.
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
