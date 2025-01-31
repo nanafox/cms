@@ -9,10 +9,18 @@ class ProfilePolicy < ::ResourcePolicy
     true
   end
 
+  def destroy?
+    false
+  end
+
   # Core attributes
 
   def permitted_attributes_for_create
     [ :name, :phone_number, :role ]
+  end
+
+  def permitted_attributes_for_update
+    [ :name, :phone_number ]
   end
 
   def permitted_attributes_for_read
