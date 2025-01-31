@@ -2,7 +2,7 @@ class ProfilePolicy < ::ResourcePolicy
   # Core actions
 
   def create?
-    true
+    user.profile.blank?
   end
 
   def read?
