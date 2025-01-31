@@ -12,11 +12,11 @@ class ProfilePolicy < ::ResourcePolicy
   # Core attributes
 
   def permitted_attributes_for_create
-    [:name, :user, :phone_number]
+    [ :name, :phone_number, :role ]
   end
 
   def permitted_attributes_for_read
-    [:name, :user, :phone_number]
+    [ :name, :phone_number, :role ]
   end
 
   # Associations

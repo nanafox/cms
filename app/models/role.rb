@@ -24,4 +24,8 @@ class Role < ::ResourceRecord
     prayer_warrior: "Prayer Warrior", evangelist: "Evangelist", pastor: "Pastor"
 
   validates :name, presence: true
+
+  def to_label
+    name.titleize
+  end
 end

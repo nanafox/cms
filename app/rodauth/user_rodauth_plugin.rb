@@ -12,7 +12,11 @@ class UserRodauthPlugin < RodauthPlugin
     # http://rodauth.jeremyevans.net/documentation.html
 
     # List of authentication features that are loaded.
-    enable :login, :remember, :logout, :create_account, :verify_account, :verify_account_grace_period, :reset_password, :reset_password_notify, :change_login, :verify_login_change, :change_password, :change_password_notify, :case_insensitive_login, :internal_request
+    enable :login, :remember, :logout, :create_account, :verify_account,
+      :verify_account_grace_period, :reset_password,
+      :reset_password_notify, :change_login, :verify_login_change,
+      :change_password, :change_password_notify, :case_insensitive_login,
+      :internal_request
 
     # ==> General
 
@@ -31,7 +35,7 @@ class UserRodauthPlugin < RodauthPlugin
     # hmac_secret "<SECRET_KEY>"
 
     # Use path prefix for all routes.
-    prefix "/users"
+    prefix "/auth"
 
     # Store password hash in a column instead of a separate table.
     account_password_hash_column :password_hash
@@ -70,23 +74,28 @@ class UserRodauthPlugin < RodauthPlugin
     # Use a custom mailer for delivering authentication emails.
 
     create_reset_password_email do
-      Rodauth::UserMailer.reset_password(self.class.configuration_name, account_id, reset_password_key_value)
+      Rodauth::UserMailer.reset_password(self.class.configuration_name,
+                                         account_id, reset_password_key_value)
     end
 
     create_verify_account_email do
-      Rodauth::UserMailer.verify_account(self.class.configuration_name, account_id, verify_account_key_value)
+      Rodauth::UserMailer.verify_account(self.class.configuration_name,
+                                         account_id, verify_account_key_value)
     end
 
     create_verify_login_change_email do |_login|
-      Rodauth::UserMailer.verify_login_change(self.class.configuration_name, account_id, verify_login_change_key_value)
+      Rodauth::UserMailer.verify_login_change(self.class.configuration_name,
+                                              account_id, verify_login_change_key_value)
     end
 
     create_password_changed_email do
-      Rodauth::UserMailer.change_password_notify(self.class.configuration_name, account_id)
+      Rodauth::UserMailer.change_password_notify(self.class.configuration_name,
+                                                 account_id)
     end
 
     create_reset_password_notify_email do
-      Rodauth::UserMailer.reset_password_notify(self.class.configuration_name, account_id)
+      Rodauth::UserMailer.reset_password_notify(self.class.configuration_name,
+                                                account_id)
     end
 
     send_email do |email|
@@ -175,7 +184,7 @@ class UserRodauthPlugin < RodauthPlugin
     login_redirect "/"
 
     # Redirect to home page after logout.
-    logout_redirect "/"
+    logout_redirect "/auth/login"
 
     # Redirect to wherever login redirects to after account verification.
     verify_account_redirect { login_redirect }

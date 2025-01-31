@@ -20,4 +20,10 @@ class User < ResourceRecord
   validates :email, presence: true
 
   enum :status, unverified: 1, verified: 2, closed: 3
+
+  scope :associated_with_user, ->(user) { }
+
+  def to_label
+    "#{profile.name} - #{role.to_label}"
+  end
 end

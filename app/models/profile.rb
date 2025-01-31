@@ -22,4 +22,21 @@ class Profile < ::ResourceRecord
 
   validates :name, presence: true
   validates :phone_number, presence: true
+
+  attribute :role
+  validates :role, presence: true, on: :create
+
+  def role
+    user.role.to_label
+  end
+
+  after_create :set_user_role
+
+  private
+
+    def set_user_role
+      unless user.role.present?
+        Role.create!(name: role, roleable: user)
+      end
+    end
 end
