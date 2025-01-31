@@ -25,6 +25,8 @@ class Role < ::ResourceRecord
 
   validates :name, presence: true
 
+  scope :admin_roles, -> { %w[church_admin chapel_leader accountant] }
+
   def to_label
     name.titleize
   end

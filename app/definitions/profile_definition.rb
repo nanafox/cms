@@ -7,9 +7,7 @@ class ProfileDefinition < ::ResourceDefinition
   field :name,
         hint: "Enter your full name. This is how other users will know you."
 
-  field :role, choices: Role.names.keys.select { |role|
-                 %w[church_admin chapel_leader accountant].include?(role)
-               }.to_h { |role|
-                 [ role.to_sym, role.titleize ]
-               }, hint: "Your role in the church.", required: true
+  field :role, choices: Role.admin_roles.to_h { |role|
+           [ role.to_sym, role.titleize ]
+         }, hint: "Your role in the church.", required: true
 end
