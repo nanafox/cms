@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_28_180632) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_31_025518) do
+  create_table "church_managment_chapels", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "color", null: false
+    t.integer "quarter", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "name", null: false
     t.integer "user_id", null: false
