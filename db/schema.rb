@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_01_31_025518) do
-  create_table "church_managment_chapels", force: :cascade do |t|
+  create_table "church_management_chapels", force: :cascade do |t|
     t.string "name", null: false
     t.string "color", null: false
     t.integer "quarter", null: false
@@ -22,9 +22,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_31_025518) do
   create_table "profiles", force: :cascade do |t|
     t.string "name", null: false
     t.integer "user_id", null: false
+    t.integer "chapel_id", null: false
     t.string "phone_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["chapel_id"], name: "index_profiles_on_chapel_id"
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
   end
 
@@ -67,6 +69,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_31_025518) do
     t.index ["email"], name: "index_users_on_email", unique: true, where: "status IN (1, 2)"
   end
 
+  add_foreign_key "profiles", "church_management_chapels", column: "chapel_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "user_login_change_keys", "users", column: "id"
   add_foreign_key "user_password_reset_keys", "users", column: "id"
