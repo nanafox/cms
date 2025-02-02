@@ -1,4 +1,4 @@
-module ChurchManagment
+module ChurchManagement
   class ResourceDefinition < ::ResourceDefinition
   end
 end

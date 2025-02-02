@@ -4,7 +4,7 @@ module ChapelMgmtDashboardPortal
     # add concerns above.
 
     config.after_initialize do
-      # add directives above.
+      scope_to_entity User, strategy: :current_chapel
     end
   end
 end

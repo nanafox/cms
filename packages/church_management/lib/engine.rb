@@ -1,4 +1,4 @@
-module ChurchManagment
+module ChurchManagement
   class Engine < Rails::Engine
     include Plutonium::Package::Engine
     # add concerns above.

@@ -7,30 +7,35 @@
 #  phone_number :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  chapel_id    :integer          not null
 #  user_id      :integer          not null
 #
 # Indexes
 #
-#  index_profiles_on_user_id  (user_id) UNIQUE
+#  index_profiles_on_chapel_id  (chapel_id)
+#  index_profiles_on_user_id    (user_id) UNIQUE
 #
 # Foreign Keys
 #
-#  user_id  (user_id => users.id)
+#  chapel_id  (chapel_id => church_management_chapels.id)
+#  user_id    (user_id => users.id)
 #
 class Profile < ::ResourceRecord
-  belongs_to :user
+  attr_reader :administrative_role
 
+  belongs_to :user
+  belongs_to :chapel, class_name: "ChurchManagement::Chapel"
   validates :name, presence: true
   validates :phone_number, presence: true
 
   attribute :role
   validates :role, presence: true, on: :create
 
-  def role
+  before_create :set_user_role
+
+  def administrative_role
     user.role.to_label
   end
-
-  after_create :set_user_role
 
   private
 

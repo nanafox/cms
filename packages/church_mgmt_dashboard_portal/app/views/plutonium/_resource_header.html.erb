@@ -2,7 +2,6 @@
   <% header.with_brand_logo do %>
     <%= resource_logo_tag(classname: "h-10") %>
   <% end %>
-
   <% header.with_action do %>
     <%=
       render Plutonium::UI::NavGridMenu.new(label: "Apps", icon: Phlex::TablerIcons::Apps) do |menu|
@@ -12,7 +11,6 @@
       end
     %>
   <% end %>
-
   <% header.with_action do %>
     <%=
       render Plutonium::UI::NavUser.new(
@@ -27,9 +25,11 @@
               end
             end
           end
-          section.with_link(label: current_user&.role&.to_label, href: "#") do |link|
-            link.with_leading do
-              render Phlex::TablerIcons::Heart.new(class: "mr-2 text-gray-400 w-4 h-4")
+          if current_user.role.present?
+            section.with_link(label: current_user.role.to_label, href: "#") do |link|
+              link.with_leading do
+                render Phlex::TablerIcons::Heart.new(class: "mr-2 text-gray-400 w-4 h-4")
+              end
             end
         end
       end

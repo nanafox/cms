@@ -16,6 +16,7 @@ class User < ResourceRecord
 
   has_one :role, as: :roleable
   has_one :profile, dependent: :destroy
+  has_one :chapel, through: :profile
 
   validates :email, presence: true
 

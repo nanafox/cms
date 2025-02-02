@@ -16,7 +16,7 @@ class ProfilePolicy < ::ResourcePolicy
   # Core attributes
 
   def permitted_attributes_for_create
-    [ :name, :phone_number, :role ]
+    [ :name, :phone_number, :role, :chapel ]
   end
 
   def permitted_attributes_for_update
@@ -24,7 +24,7 @@ class ProfilePolicy < ::ResourcePolicy
   end
 
   def permitted_attributes_for_read
-    [ :name, :phone_number, :role ]
+    [ :name, :phone_number, :administrative_role, :chapel ]
   end
 
   # Associations

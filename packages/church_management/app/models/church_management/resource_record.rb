@@ -1,4 +1,4 @@
-module ChurchManagment
+module ChurchManagement
   class ResourceRecord < ::ResourceRecord
     self.abstract_class = true
   end
