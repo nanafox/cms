@@ -10,4 +10,8 @@ class ProfileDefinition < ::ResourceDefinition
   field :role, choices: Role.admin_roles.to_h { |role|
            [ role.to_sym, role.titleize ]
          }, hint: "Your role in the church.", required: true
+
+  field :chapel, choices: ChurchManagement::Chapel.names.to_h { |name|
+             [ name.to_sym, name.titleize ]
+           }, hint: "Select your chapel.", required: true
 end
