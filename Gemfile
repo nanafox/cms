@@ -80,3 +80,5 @@ gem "sequel-activerecord_connection", "~> 2.0"
 gem "tilt", "~> 2.6"
 
 gem "rodauth-rails", "~> 2.0"
+
+gem "standard", "~> 1.44"

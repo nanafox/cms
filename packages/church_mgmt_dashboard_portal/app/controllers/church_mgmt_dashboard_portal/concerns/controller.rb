@@ -13,6 +13,8 @@ module ChurchMgmtDashboardPortal
 
       private
 
+        def app_name = "Church Management Dashboard Portal"
+
         def ensure_user_profile_complete
           if current_user.profile.blank?
             redirect_to resource_url_for(::Profile, action: :new)

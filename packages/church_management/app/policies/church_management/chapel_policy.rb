@@ -12,12 +12,12 @@ class ChurchManagement::ChapelPolicy < ChurchManagement::ResourcePolicy
   # Core attributes
 
   def permitted_attributes_for_read
-    [ :name, :color ]
+    [:name, :color]
   end
 
   # Associations
 
   def permitted_associations
-    %i[admin_users]
+    %i[admin_users members]
   end
 end
