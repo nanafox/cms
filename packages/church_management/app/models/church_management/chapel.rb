@@ -12,18 +12,20 @@
 require_relative "../church_management"
 
 class ChurchManagement::Chapel < ChurchManagement::ResourceRecord
+  dynamic_path_parameter :name
+
   validates :name, presence: true
   validates :color, presence: true
   validates :quarter, presence: true
 
-  has_many :admin_users, class_name: "Profile", foreign_key: "profile_id"
+  has_many :admin_users, class_name: "Profile"
+  has_many :members
 
   enum :name, love: "Love", faith: "Faith", joy: "Joy", peace: "Peace"
   enum :color, red: "Red", green: "Green", yellow: "Yellow", blue: "Blue"
 
-  scope :associated_with_user, ->(user) { }
   scope :associated_with_church_management_chapel,
-        ->(church_management_chapel) { }
+    ->(church_management_chapel) {}
 
   def to_label
     name.titlecase

@@ -1,3 +1,43 @@
-<div class="mb-4">
-  <h1 class="text-3xl font-bold leading-none text-gray-900 dark:text-white">Chapel Administration Dashboard: <%= current_user.chapel.name %></h1>
+<div class="container mx-auto p-4">
+  <div class="flex items-center justify-between mb-6">
+    <h1
+      class="
+        mb-2 text-3xl font-extrabold leading-none tracking-tight text-gray-900
+        md:text-4xl dark:text-white
+      "
+    >
+      <%= app_name %>: <%= current_user.chapel.to_label %>
+    </h1>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% icon_style = "dark:stroke-white w-12 h-12" %>
+    <% registered_resources.each do |resource| %>
+      <% next unless allowed_to?(:index?, resource) && ["Member"].include?(resource.model_name.human) %>
+      <div
+        class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden"
+      >
+        <div class="p-4">
+          <div class="flex items-center space-x-2 mb-2 hover:animate-pulse">
+            <%# render icon_for(resource.model_name.human) %>
+            <div class="flex flex-col">
+              <a
+                href="<%= resource_url_for(resource, parent: nil) %>"
+                class="
+                text-2xl font-medium text-gray-900 dark:text-white truncate hover:underline
+              "
+              >
+                <%= resource.model_name.human.pluralize.titleize %>
+              </a>
+              <p class="text-sm font-medium text-gray dark:text-white">
+                <%# description_for(resource.model_name.human) %>
+              </p>
+            </div>
+          </div>
+          <div class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+            <%= authorized_resource_scope(resource).count %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
