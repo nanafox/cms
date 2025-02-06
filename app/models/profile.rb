@@ -34,14 +34,14 @@ class Profile < ::ResourceRecord
   before_create :set_user_role
 
   def administrative_role
-    user.role.to_label
+    user.role.titleize
   end
 
   private
 
-    def set_user_role
-      unless user.role.present?
-        Role.create!(name: role, roleable: user)
-      end
+  def set_user_role
+    unless user.role.present?
+      user.update(role:)
     end
+  end
 end

@@ -1,4 +1,8 @@
 class ChurchManagement::MemberDefinition < ChurchManagement::ResourceDefinition
+  action :add_to_ministry,
+    interaction: ChurchManagement::MinistryMemberships::AddToMinistry,
+    collection_record_action: false
+
   new_page_title "Add a Member Details"
   new_page_description "Register the new member to help track their activities in the church"
 
@@ -16,13 +20,13 @@ class ChurchManagement::MemberDefinition < ChurchManagement::ResourceDefinition
 
   field :marital_status,
     choices: ChurchManagement::Member.marital_statuses.keys.to_h { |status|
-      [ status.to_sym, status.titleize ]
+      [status.to_sym, status.titleize]
     },
     hint: "The marital status of the member."
 
   field :employment_status,
     choices: ChurchManagement::Member.employment_statuses.keys.to_h { |status|
-      [ status.to_sym, status.titleize ]
+      [status.to_sym, status.titleize]
     },
     hint: "The employment status of the member."
 
@@ -46,7 +50,7 @@ class ChurchManagement::MemberDefinition < ChurchManagement::ResourceDefinition
   display :marital_status, formatter: ->(value) { value.titlecase }
   display :employment_status, formatter: ->(value) { value.titlecase }
 
-    search do |scope, query|
+  search do |scope, query|
     scope.where(
       "first_name LIKE :q OR last_name LIKE :q OR middle_name LIKE :q",
       q: "%#{query}%",

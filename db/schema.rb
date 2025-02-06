@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_02_010443) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_06_170619) do
   create_table "church_management_chapels", force: :cascade do |t|
     t.string "name", null: false
     t.string "color", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_010443) do
     t.string "last_name", null: false
     t.string "middle_name"
     t.date "date_of_birth", null: false
-    t.string "marital_status", null: false
+    t.integer "marital_status", null: false
     t.string "email_address"
     t.string "residential_address", null: false
     t.string "primary_phone_number", null: false
@@ -38,6 +38,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_010443) do
     t.index ["creator_id"], name: "index_church_management_members_on_creator_id"
   end
 
+  create_table "church_management_ministries", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "church_management_ministry_memberships", force: :cascade do |t|
+    t.string "role", null: false
+    t.integer "member_id", null: false
+    t.integer "ministry_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_church_management_ministry_memberships_on_member_id"
+    t.index ["ministry_id", "member_id"], name: "idx_on_ministry_id_member_id_dc050155b3", unique: true
+    t.index ["ministry_id"], name: "index_church_management_ministry_memberships_on_ministry_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "name", null: false
     t.integer "user_id", null: false
@@ -47,15 +65,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_010443) do
     t.datetime "updated_at", null: false
     t.index ["chapel_id"], name: "index_profiles_on_chapel_id"
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "roleable_type"
-    t.integer "roleable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["roleable_type", "roleable_id"], name: "index_roles_on_roleable", unique: true
   end
 
   create_table "user_login_change_keys", force: :cascade do |t|
@@ -84,12 +93,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_02_010443) do
   create_table "users", force: :cascade do |t|
     t.integer "status", default: 1, null: false
     t.string "email", null: false
+    t.integer "role"
     t.string "password_hash"
     t.index ["email"], name: "index_users_on_email", unique: true, where: "status IN (1, 2)"
   end
 
   add_foreign_key "church_management_members", "church_management_chapels", column: "chapel_id"
   add_foreign_key "church_management_members", "users", column: "creator_id"
+  add_foreign_key "church_management_ministry_memberships", "church_management_members", column: "member_id"
+  add_foreign_key "church_management_ministry_memberships", "church_management_ministries", column: "ministry_id"
   add_foreign_key "profiles", "church_management_chapels", column: "chapel_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "user_login_change_keys", "users", column: "id"

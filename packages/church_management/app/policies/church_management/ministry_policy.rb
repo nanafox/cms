@@ -1,4 +1,4 @@
-class RolePolicy < ::ResourcePolicy
+class ChurchManagement::MinistryPolicy < ChurchManagement::ResourcePolicy
   # Core actions
 
   def create?
@@ -12,16 +12,16 @@ class RolePolicy < ::ResourcePolicy
   # Core attributes
 
   def permitted_attributes_for_create
-    [:name, :roleable]
+    [:name, :description]
   end
 
   def permitted_attributes_for_read
-    [:name, :roleable]
+    [:name, :description]
   end
 
   # Associations
 
   def permitted_associations
-    %i[]
+    %i[ministry_memberships]
   end
 end

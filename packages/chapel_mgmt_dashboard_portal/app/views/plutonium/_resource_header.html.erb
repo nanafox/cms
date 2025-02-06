@@ -1,3 +1,4 @@
+<%# TODO: Move repeated layout code to shared concern for other dashboards to use%>
 <%= render Plutonium::UI::Layout::Header.new do |header| %>
   <% header.with_brand_logo do %>
     <%= resource_logo_tag(classname: "h-10") %>
@@ -26,7 +27,7 @@
             end
           end
           if current_user.role.present?
-            section.with_link(label: current_user.role.to_label, href: "#") do |link|
+            section.with_link(label: current_user.role, href: "#") do |link|
               link.with_leading do
                 render Phlex::TablerIcons::Heart.new(class: "mr-2 text-gray-400 w-4 h-4")
               end
