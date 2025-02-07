@@ -17,6 +17,10 @@ class ChurchManagement::MemberPolicy < ChurchManagement::ResourcePolicy
     user.church_admin? || user.chapel_leader?
   end
 
+  def mark_attendance?
+    user.church_admin? || user.chapel_leader?
+  end
+
   # Core attributes
 
   def permitted_attributes_for_create
@@ -42,6 +46,6 @@ class ChurchManagement::MemberPolicy < ChurchManagement::ResourcePolicy
   # Associations
 
   def permitted_associations
-    %i[ministry_memberships department_memberships]
+    %i[attendances ministry_memberships department_memberships]
   end
 end

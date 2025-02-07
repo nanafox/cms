@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_07_152552) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_07_182243) do
+  create_table "church_management_attendances", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.date "date", null: false
+    t.integer "status", null: false
+    t.integer "recorder_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["date", "member_id"], name: "index_church_management_attendances_on_date_and_member_id", unique: true
+    t.index ["member_id"], name: "index_church_management_attendances_on_member_id"
+    t.index ["recorder_id"], name: "index_church_management_attendances_on_recorder_id"
+  end
+
   create_table "church_management_chapels", force: :cascade do |t|
     t.string "name", null: false
     t.string "color", null: false
@@ -116,6 +128,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_07_152552) do
     t.index ["email"], name: "index_users_on_email", unique: true, where: "status IN (1, 2)"
   end
 
+  add_foreign_key "church_management_attendances", "church_management_members", column: "member_id"
+  add_foreign_key "church_management_attendances", "users", column: "recorder_id"
   add_foreign_key "church_management_department_memberships", "church_management_departments", column: "department_id"
   add_foreign_key "church_management_department_memberships", "church_management_members", column: "member_id"
   add_foreign_key "church_management_members", "church_management_chapels", column: "chapel_id"

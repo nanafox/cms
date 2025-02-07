@@ -54,6 +54,8 @@ class ChurchManagement::Member < ChurchManagement::ResourceRecord
 
   has_many :department_memberships
   has_many :departments, through: :department_memberships
+
+  has_many :attendances
   # add has_many associations above.
 
   # add attachments above.

@@ -1,4 +1,8 @@
 class ChurchManagement::MemberDefinition < ChurchManagement::ResourceDefinition
+  action :mark_attendance,
+    interaction: ChurchManagement::Attendances::MarkAttendance,
+    collection_record_action: true
+
   action :add_to_ministry,
     interaction: ChurchManagement::MinistryMemberships::AddToMinistry,
     collection_record_action: false

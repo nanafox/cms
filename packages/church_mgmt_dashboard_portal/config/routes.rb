@@ -8,6 +8,7 @@ ChurchMgmtDashboardPortal::Engine.routes.draw do
   register_resource ::ChurchManagement::MinistryMembership
   register_resource ::ChurchManagement::Department
   register_resource ::ChurchManagement::DepartmentMembership
+  register_resource ::ChurchManagement::Attendance
   # register resources above.
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
