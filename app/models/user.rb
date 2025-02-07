@@ -26,6 +26,6 @@ class User < ResourceRecord
   scope :associated_with_user, ->(user) { }
 
   def to_label
-    "#{profile.name} - #{role.to_label}"
+    "#{profile.name} - #{role.titleize}"
   end
 end
