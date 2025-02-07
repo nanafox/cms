@@ -3,7 +3,7 @@
 # Table name: church_management_ministry_memberships
 #
 #  id          :integer          not null, primary key
-#  role        :string           not null
+#  role        :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  member_id   :integer          not null
@@ -42,6 +42,8 @@ class ChurchManagement::MinistryMembership < ChurchManagement::ResourceRecord
   # add scopes above.
 
   validates :role, presence: true
+  validates :member, presence: true,
+             uniqueness: { scope: :ministry_id, message: "is already in this ministry" }
   # add validations above.
 
   # add callbacks above.

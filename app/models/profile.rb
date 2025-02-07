@@ -31,7 +31,7 @@ class Profile < ::ResourceRecord
   attribute :role
   validates :role, presence: true, on: :create
 
-  before_create :set_user_role
+  after_create :set_user_role
 
   def administrative_role
     user.role.titleize

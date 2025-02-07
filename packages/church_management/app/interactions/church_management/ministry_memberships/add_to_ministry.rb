@@ -8,9 +8,11 @@ module ChurchManagement
       attribute :role
 
       field :ministry,
-            choices: ChurchManagement::Ministry.all.to_h {
-              |ministry|
-              [ministry.id, ministry.name]
+            choices: -> {
+              ChurchManagement::Ministry
+                .pluck(:id, :name).to_h.each_pair { |id, ministry|
+                [id, ministry]
+              }
             }, required: true, hint: "Select the ministry to add this member."
 
       field :role,
@@ -25,7 +27,7 @@ module ChurchManagement
         db_ministry = ChurchManagement::Ministry.find(ministry)
 
         membership = resource.ministry_memberships.build(
-          role:, ministry: db_ministry,
+          role: role.to_sym, ministry: db_ministry,
         )
 
         if membership.save

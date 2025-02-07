@@ -1,7 +1,7 @@
 class ChurchManagement::MinistryMembershipPolicy < ChurchManagement::ResourcePolicy
   # Core actions
 
-  def create?
+  def new?
     false
   end
 

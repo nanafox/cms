@@ -28,7 +28,7 @@ class ChurchManagement::Ministry < ChurchManagement::ResourceRecord
   scope :associated_with_user, ->(user) { }
   # add scopes above.
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   # add validations above.
 

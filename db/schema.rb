@@ -46,7 +46,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_170619) do
   end
 
   create_table "church_management_ministry_memberships", force: :cascade do |t|
-    t.string "role", null: false
+    t.integer "role", null: false
     t.integer "member_id", null: false
     t.integer "ministry_id", null: false
     t.datetime "created_at", null: false

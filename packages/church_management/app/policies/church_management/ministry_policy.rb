@@ -2,7 +2,7 @@ class ChurchManagement::MinistryPolicy < ChurchManagement::ResourcePolicy
   # Core actions
 
   def create?
-    true
+    false
   end
 
   def read?
