@@ -1,7 +1,7 @@
 module ChurchManagement
   module MinistryMemberships
     class AddToMinistry < ::ResourceInteraction
-      presents label: "Add to Ministry", icon: Phlex::TablerIcons::UsersGroup
+      presents label: "Add to Ministry", icon: Phlex::TablerIcons::Pray
       attribute :resource
 
       attribute :ministry

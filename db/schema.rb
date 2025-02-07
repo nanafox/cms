@@ -10,11 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_170619) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_07_152552) do
   create_table "church_management_chapels", force: :cascade do |t|
     t.string "name", null: false
     t.string "color", null: false
     t.integer "quarter", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "church_management_department_memberships", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "department_id", null: false
+    t.integer "role", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "idx_on_department_id_8fc1e61721"
+    t.index ["member_id", "department_id"], name: "idx_on_member_id_department_id_3d84d256d8", unique: true
+    t.index ["member_id"], name: "index_church_management_department_memberships_on_member_id"
+  end
+
+  create_table "church_management_departments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -98,6 +116,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_170619) do
     t.index ["email"], name: "index_users_on_email", unique: true, where: "status IN (1, 2)"
   end
 
+  add_foreign_key "church_management_department_memberships", "church_management_departments", column: "department_id"
+  add_foreign_key "church_management_department_memberships", "church_management_members", column: "member_id"
   add_foreign_key "church_management_members", "church_management_chapels", column: "chapel_id"
   add_foreign_key "church_management_members", "users", column: "creator_id"
   add_foreign_key "church_management_ministry_memberships", "church_management_members", column: "member_id"

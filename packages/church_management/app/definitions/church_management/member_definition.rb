@@ -3,6 +3,10 @@ class ChurchManagement::MemberDefinition < ChurchManagement::ResourceDefinition
     interaction: ChurchManagement::MinistryMemberships::AddToMinistry,
     collection_record_action: false
 
+  action :add_to_department,
+    interaction: ChurchManagement::DepartmentMemberships::AddToDepartment,
+    collection_record_action: false
+
   new_page_title "Add a Member Details"
   new_page_description "Register the new member to help track their activities in the church"
 

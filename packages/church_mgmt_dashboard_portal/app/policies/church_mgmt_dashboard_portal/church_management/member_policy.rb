@@ -1,10 +1,6 @@
 module ChurchMgmtDashboardPortal
   module ChurchManagement
     class MemberPolicy < ::ChurchManagement::MemberPolicy
-      def add_to_ministry?
-        true
-      end
-
       relation_scope do |relation|
         relation
       end
@@ -13,8 +9,8 @@ module ChurchMgmtDashboardPortal
         super + [:chapel]
       end
 
-      def permitted_associations
-        %i[chapel] + super
+      def permitted_attributes_for_show
+        super + [:chapel]
       end
     end
   end

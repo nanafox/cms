@@ -9,6 +9,14 @@ class ChurchManagement::MemberPolicy < ChurchManagement::ResourcePolicy
     true
   end
 
+  def add_to_ministry?
+    user.church_admin? || user.chapel_leader?
+  end
+
+  def add_to_department?
+    user.church_admin? || user.chapel_leader?
+  end
+
   # Core attributes
 
   def permitted_attributes_for_create
@@ -34,6 +42,6 @@ class ChurchManagement::MemberPolicy < ChurchManagement::ResourcePolicy
   # Associations
 
   def permitted_associations
-    %i[ministry_memberships]
+    %i[ministry_memberships department_memberships]
   end
 end
