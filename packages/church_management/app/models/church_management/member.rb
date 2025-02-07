@@ -55,6 +55,13 @@ class ChurchManagement::Member < ChurchManagement::ResourceRecord
 
   # add attachments above.
 
+  class << self
+    ChurchManagement::Chapel.names.keys.each do |chapel_name|
+      define_method chapel_name do
+        joins(:chapel).where(church_management_chapels: { name: chapel_name })
+      end
+    end
+  end
   # add scopes above.
 
   validates :first_name, presence: true

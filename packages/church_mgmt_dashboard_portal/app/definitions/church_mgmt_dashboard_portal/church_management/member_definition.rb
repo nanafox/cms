@@ -10,10 +10,9 @@ module ChurchMgmtDashboardPortal
       new_page_description "Register a new member. " \
                            "NOTE: The Chapel is automatically set based " \
                            "on their date of birth."
-      ::ChurchManagement::Chapel.names.keys.each do |chapel|
-        scope(chapel) do |member|
-          member.joins(:chapel).where(chapel: [name: chapel])
-        end
+
+      %i[love faith joy peace].each do |chapel|
+        scope chapel
       end
     end
   end
