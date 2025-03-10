@@ -16,7 +16,7 @@ class ChurchManagement::AttendancePolicy < ChurchManagement::ResourcePolicy
   end
 
   def permitted_attributes_for_read
-    [:member, :status]
+    [:member, :date, :status]
   end
 
   relation_scope do |relation|
