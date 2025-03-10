@@ -25,7 +25,7 @@ class ChurchManagement::Department < ChurchManagement::ResourceRecord
 
   # add attachments above.
 
-  scope :associated_with_user, ->(user) { }
+  scope :associated_with_user, ->(user) {}
   # add scopes above.
 
   validates :name, presence: true

@@ -8,17 +8,17 @@ module ChurchManagement
       attribute :role
 
       field :ministry,
-            choices: -> {
-              ChurchManagement::Ministry
-                .pluck(:id, :name).to_h.each_pair { |id, ministry|
-                [id, ministry]
-              }
-            }, required: true, hint: "Select the ministry to add this member."
+        choices: -> {
+          ChurchManagement::Ministry
+            .pluck(:id, :name).to_h.each_pair { |id, ministry|
+            [id, ministry]
+          }
+        }, required: true, hint: "Select the ministry to add this member."
 
       field :role,
-            choices: ChurchManagement::MinistryMembership.roles.to_h { |role|
-              [role.to_sym, role.titleize]
-            }, hint: "The role of the member in this ministry.", required: true
+        choices: ChurchManagement::MinistryMembership.roles.to_h { |role|
+          [role.to_sym, role.titleize]
+        }, hint: "The role of the member in this ministry.", required: true
 
       validates :ministry, presence: true
       validates :role, presence: true
@@ -27,7 +27,7 @@ module ChurchManagement
         db_ministry = ChurchManagement::Ministry.find(ministry)
 
         membership = resource.ministry_memberships.build(
-          role: role.to_sym, ministry: db_ministry,
+          role: role.to_sym, ministry: db_ministry
         )
 
         if membership.save

@@ -21,8 +21,6 @@
 #  user_id    (user_id => users.id)
 #
 class Profile < ::ResourceRecord
-  attr_reader :administrative_role
-
   belongs_to :user
   belongs_to :chapel, class_name: "ChurchManagement::Chapel"
   validates :name, presence: true

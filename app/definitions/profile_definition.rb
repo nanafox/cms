@@ -5,13 +5,13 @@ class ProfileDefinition < ::ResourceDefinition
                        "access and responsible for."
 
   field :name,
-        hint: "Enter your full name. This is how other users will know you."
+    hint: "Enter your full name. This is how other users will know you."
 
   field :role, choices: User.roles.to_h { |role|
-           [role.to_sym, role.titleize]
-         }, hint: "Your role in the church.", required: true
+    [role.to_sym, role.titleize]
+  }, hint: "Your role in the church.", required: true
 
   field :chapel, choices: ChurchManagement::Chapel.names.to_h { |name|
-             [name.to_sym, name.titleize]
-           }, hint: "Select your chapel.", required: true
+    [name.to_sym, name.titleize]
+  }, hint: "Select your chapel.", required: true
 end

@@ -7,13 +7,12 @@ module ChurchManagement
       attribute :date
       attribute :status
 
-      field :date, as: :date, value: Date.today(), required: true,
-                   hint: "Select the date mark attendance for."
-      field :status, choices: ChurchManagement::Attendance
-                       .statuses.keys.to_h { |status|
-                       [status.to_sym, status.titlecase]
-                     }, hint: "Was the member Present or Absent?",
-                     required: true
+      field :date, as: :date, value: Date.today, required: true,
+        hint: "Select the date mark attendance for."
+      field :status,
+        choices: ChurchManagement::Attendance.statuses.keys.to_h { |status|
+          [status.to_sym, status.titlecase]
+        }, hint: "Was the member Present or Absent?", required: true
 
       validates :date, :status, presence: true
 

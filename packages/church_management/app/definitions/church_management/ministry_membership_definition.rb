@@ -3,8 +3,8 @@ class ChurchManagement::MinistryMembershipDefinition < ChurchManagement::Resourc
   # edit_page_description ""
 
   field :role,
-        choices: ChurchManagement::MinistryMembership
-          .roles.to_h { |role| [role.to_sym, role.titleize] }
+    choices: ChurchManagement::MinistryMembership
+      .roles.to_h { |role| [role.to_sym, role.titleize] }
 
   display :role, formatter: ->(value) { value.titleize }
 end

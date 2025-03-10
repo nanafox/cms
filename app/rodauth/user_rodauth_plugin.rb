@@ -75,27 +75,27 @@ class UserRodauthPlugin < RodauthPlugin
 
     create_reset_password_email do
       Rodauth::UserMailer.reset_password(self.class.configuration_name,
-                                         account_id, reset_password_key_value)
+        account_id, reset_password_key_value)
     end
 
     create_verify_account_email do
       Rodauth::UserMailer.verify_account(self.class.configuration_name,
-                                         account_id, verify_account_key_value)
+        account_id, verify_account_key_value)
     end
 
     create_verify_login_change_email do |_login|
       Rodauth::UserMailer.verify_login_change(self.class.configuration_name,
-                                              account_id, verify_login_change_key_value)
+        account_id, verify_login_change_key_value)
     end
 
     create_password_changed_email do
       Rodauth::UserMailer.change_password_notify(self.class.configuration_name,
-                                                 account_id)
+        account_id)
     end
 
     create_reset_password_notify_email do
       Rodauth::UserMailer.reset_password_notify(self.class.configuration_name,
-                                                account_id)
+        account_id)
     end
 
     send_email do |email|

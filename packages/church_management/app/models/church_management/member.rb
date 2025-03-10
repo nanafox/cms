@@ -63,7 +63,7 @@ class ChurchManagement::Member < ChurchManagement::ResourceRecord
   class << self
     ChurchManagement::Chapel.names.keys.each do |chapel_name|
       define_method chapel_name do
-        joins(:chapel).where(church_management_chapels: { name: chapel_name })
+        joins(:chapel).where(church_management_chapels: {name: chapel_name})
       end
     end
   end
@@ -104,7 +104,7 @@ class ChurchManagement::Member < ChurchManagement::ResourceRecord
   def set_chapel
     if date_of_birth.present?
       self.chapel = ChurchManagement::Chapel.find_by(
-        quarter: date_of_birth.quarter,
+        quarter: date_of_birth.quarter
       )
     else
       errors.add(:date_of_birth, "must be present")

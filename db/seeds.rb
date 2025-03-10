@@ -3,7 +3,7 @@ if ChurchManagement::Chapel.all.empty?
     ChurchManagement::Chapel.create!(
       name: chapel.titlecase,
       color: ChurchManagement::Chapel.colors.keys[quarter],
-      quarter: quarter + 1,
+      quarter: quarter + 1
     )
   end
 end

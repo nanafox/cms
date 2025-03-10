@@ -38,12 +38,13 @@ class ChurchManagement::MinistryMembership < ChurchManagement::ResourceRecord
 
   # add attachments above.
 
-  scope :associated_with_user, ->(user) { }
+  scope :associated_with_user, ->(user) {}
   # add scopes above.
 
   validates :role, presence: true
   validates :member, presence: true,
-             uniqueness: { scope: :ministry_id, message: "is already in this ministry" }
+    uniqueness: {scope: :ministry_id, message: "is already in this ministry"}
+  validate :cant_join_single_breed_and_singles
   # add validations above.
 
   # add callbacks above.
@@ -54,6 +55,19 @@ class ChurchManagement::MinistryMembership < ChurchManagement::ResourceRecord
 
   def to_label
     "#{member.full_name} > #{ministry.name} Ministry"
+  end
+
+  def cant_join_single_breed_and_singles
+    return unless ministry.name == "New Breed" || ministry.name == "Singles"
+    error = "can't join both Singles and New Breed ministries at the same time"
+
+    if ministry.name == "New Breed" &&
+        member.in?(ChurchManagement::Ministry.find_by(name: "Singles").members)
+      errors.add(:member, error)
+    elsif ministry.name == "Singles" &&
+        member.in?(ChurchManagement::Ministry.find_by(name: "New Breed").members)
+      errors.add(:member, error)
+    end
   end
 
   # add methods above.

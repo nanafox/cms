@@ -23,7 +23,7 @@ class User < ResourceRecord
   enum :role, church_admin: 0, chapel_leader: 1, accountant: 2
   enum :status, unverified: 1, verified: 2, closed: 3
 
-  scope :associated_with_user, ->(user) { }
+  scope :associated_with_user, ->(user) {}
 
   def to_label
     "#{profile.name} - #{role.titleize}"

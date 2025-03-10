@@ -45,7 +45,7 @@ class ChurchManagement::Attendance < ChurchManagement::ResourceRecord
   validates :status, presence: true
 
   validates :member,
-    uniqueness: { scope: :date, message: "has been marked already for today" }
+    uniqueness: {scope: :date, message: "has been marked already for today"}
   # add validations above.
 
   # add callbacks above.

@@ -20,7 +20,7 @@ class ChurchManagement::MemberDefinition < ChurchManagement::ResourceDefinition
   field :first_name, as: :string, hint: "Enter the first name of the member."
   field :last_name, as: :string, hint: "Enter the last name of the member."
   field :middle_name, as: :string,
-                      hint: "Enter the middle name of the member (optional)."
+    hint: "Enter the middle name of the member (optional)."
   field :date_of_birth,
     as: :date,
     hint: "Enter the date of birth of the member. " \
@@ -61,7 +61,7 @@ class ChurchManagement::MemberDefinition < ChurchManagement::ResourceDefinition
   search do |scope, query|
     scope.where(
       "first_name LIKE :q OR last_name LIKE :q OR middle_name LIKE :q",
-      q: "%#{query}%",
+      q: "%#{query}%"
     )
   end
 end

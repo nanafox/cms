@@ -38,14 +38,14 @@ class ChurchManagement::DepartmentMembership < ChurchManagement::ResourceRecord
 
   # add attachments above.
 
-  scope :associated_with_user, ->(user) { }
+  scope :associated_with_user, ->(user) {}
   # add scopes above.
 
   validates :role, presence: true
   validates :member,
-            uniqueness: {
-              scope: :department_id, message: "is already in this department",
-            }
+    uniqueness: {
+      scope: :department_id, message: "is already in this department"
+    }
   # add validations above.
 
   # add callbacks above.
