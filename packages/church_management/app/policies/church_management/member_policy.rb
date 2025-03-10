@@ -18,7 +18,7 @@ class ChurchManagement::MemberPolicy < ChurchManagement::ResourcePolicy
   end
 
   def mark_attendance?
-    user.church_admin? || user.chapel_leader?
+    Date.today.sunday? && (user.church_admin? || user.chapel_leader?)
   end
 
   # Core attributes
@@ -27,7 +27,7 @@ class ChurchManagement::MemberPolicy < ChurchManagement::ResourcePolicy
     [
       :first_name, :last_name, :middle_name, :date_of_birth, :marital_status,
       :email_address, :residential_address, :primary_phone_number,
-      :whatsapp_account_number, :employment_status,
+      :whatsapp_account_number, :employment_status
     ]
   end
 
@@ -35,7 +35,7 @@ class ChurchManagement::MemberPolicy < ChurchManagement::ResourcePolicy
     [
       :first_name, :last_name, :middle_name, :date_of_birth, :marital_status,
       :email_address, :residential_address, :primary_phone_number,
-      :whatsapp_account_number, :employment_status,
+      :whatsapp_account_number, :employment_status
     ]
   end
 
