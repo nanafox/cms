@@ -8,7 +8,7 @@ module ChurchManagement
       attribute :status
 
       field :date, as: :date, value: Date.today, required: true,
-        hint: "Select the date mark attendance for."
+        hint: "Select the date to mark attendance for."
       field :status,
         choices: ChurchManagement::Attendance.statuses.keys.to_h { |status|
           [status.to_sym, status.titlecase]
